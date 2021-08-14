@@ -8,4 +8,3 @@ const divide = (a, b) => {
 	return a / b;
 }
 const operate = (func, a, b) => func(a,b);
-
