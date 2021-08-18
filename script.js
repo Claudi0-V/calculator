@@ -5,7 +5,7 @@ const numButtons = document.querySelectorAll('.num-buttons');
 const clearButton = document.getElementById('clear');
 const mathFuncs = ['+', '-', '*', '/'];
 const equalButton = document.querySelector('#equal');
-const backButton = document.querySelector('#back')
+const backButton = document.querySelector('#Backspace')
 
 let a = '';
 let b = '';
@@ -16,7 +16,7 @@ let last
 
 const add = (a, b) => a + b;
 const subtract = (a, b) =>  String(a - b);
-const multiply = (a, b) => a * bs;
+const multiply = (a, b) => a * b;
 const divide = (a, b) => {	
 	if (a === 0 || b === 0 ) {
 		return "Infinity"
@@ -83,9 +83,22 @@ function clearCall() {
 }
 
 function main(e) {
-	const key = e.target.dataset.key;
-	variablesUpdater(key);
-	displayUpdate(key);
+	let key;
+	if (event.type === "keydown") {
+		const foundKey = document.querySelector(`.buttons[data-key="${event.key}"]`);
+		if (!foundKey) return;
+		key = event.key;
+	} else {
+		key = e.target.dataset.key
+	}
+	if (key === 'Backspace') {
+		backspace()
+	} else if (key === '='){
+		equalCall()
+	}
+	else {
+		variablesUpdater(key);
+		displayUpdate(key);}
 }
 
 function equalCall() {
@@ -96,7 +109,6 @@ function equalCall() {
 }
 
 function backspace() {
-	console.log('backspace')
 	if (last === 'a') {
 		a = a.slice(0,-2);
 	} else if (last === 'b') {
@@ -115,3 +127,4 @@ numButtons.forEach(button => button.addEventListener('click', main))
 funcButtons.forEach(button => button.addEventListener('click', main))
 clearButton.addEventListener('click',clearCall)
 equalButton.addEventListener('click', equalCall)
+window.addEventListener('keydown', main)
