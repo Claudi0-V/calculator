@@ -12,7 +12,8 @@ let b = '';
 let operation = '';
 let topString ='';
 let bottomContent = '';
-let last
+let last;
+let hasEqual;
 
 const add = (a, b) => a + b;
 const subtract = (a, b) =>  String(a - b);
@@ -79,10 +80,14 @@ function clearCall() {
 	topString = '';
 	bottomContent = '';
 	last = '';
+	hasEqual = false;
 	displayUpdate('');
 }
 
 function main(e) {
+	if (hasEqual) {
+		clearCall()
+	}
 	let key;
 	if (event.type === "keydown") {
 		const foundKey = document.querySelector(`.buttons[data-key="${event.key}"]`);
@@ -105,7 +110,8 @@ function equalCall() {
 	topString += ' = ';
 	bottomContent = '';
 	let result = operate(a,operation,b);
-	displayUpdate(result)
+	displayUpdate(result);
+	hasEqual = true;
 }
 
 function backspace() {
