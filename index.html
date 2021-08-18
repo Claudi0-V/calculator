@@ -8,29 +8,30 @@
 	<script src="script.js" defer></script>
 </head>
 <body>
-	<div class="main">
-		<div class="display">
-			
+	<div id="main">
+		<div class="display-container">
+			<div id="top-display"></div>
+			<div id="bottom-display"></div>
 		</div>
 		<div class="buttons-container">
-			<button class="func-btn buttons">+</button>
-			<button class="func-btn buttons">-</button>
-			<button class="func-btn buttons">x</button>
-			<button class="func-btn buttons">/</button>
-			<button class="buttons">7</button>
-			<button class="buttons">8</button>
-			<button class="buttons">9</button>
-			<button class="buttons"><<</button>
-			<button class="buttons">4</button>
-			<button class="buttons">5</button>
-			<button class="buttons">6</button>
-			<button class="buttons">1</button>
-			<button class="buttons">2</button>
-			<button class="buttons">3</button>
-			<button class="buttons">0</button>
-			<button class="equal buttons">=</button>
-			<button class="buttons">.</button>
-			<button class="buttons">ac</button>
+			<button class="func-btn buttons" data-key='+'>+</button>
+			<button class="func-btn buttons" data-key='-'>-</button>
+			<button class="func-btn buttons" data-key='*'>x</button>
+			<button class="func-btn buttons" data-key='/'>/</button>
+			<button class="num-buttons buttons" data-key='7'>7</button>
+			<button class="num-buttons buttons" data-key='8'>8</button>
+			<button class="num-buttons buttons" data-key='9'>9</button>
+			<button class="buttons" id='back' data-key='back'><<</button>
+			<button class="num-buttons buttons" data-key='4'>4</button>
+			<button class="num-buttons buttons" data-key='5'>5</button>
+			<button class="num-buttons buttons" data-key='6'>6</button>
+			<button class="num-buttons buttons" data-key='1'>1</button>
+			<button class="num-buttons buttons" data-key='2'>2</button>
+			<button class="num-buttons buttons" data-key='3'>3</button>
+			<button class="num-buttons buttons" data-key='0'>0</button>
+			<button class="buttons" id="equal" data-key=' = '>=</button>
+			<button class="num-buttons buttons" data-key='.'>.</button>
+			<button  id="clear" data-value='clear'>ac</button>
 		</div><!-- buttons div-->
 	</div> <!-- main div-->
 </body>
