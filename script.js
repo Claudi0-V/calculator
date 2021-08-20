@@ -1,11 +1,7 @@
 const topDisplay = document.querySelector('#top-display');
 const bottomDisplay = document.querySelector('#bottom-display');
-const funcButtons = document.querySelectorAll('.func-btn');
-const numButtons = document.querySelectorAll('.num-buttons');
-const clearButton = document.getElementById('clear');
+const allButtons = document.querySelectorAll('.buttons');
 const mathFuncs = ['+', '-', '*', '/'];
-const equalButton = document.querySelector('#equal');
-const backButton = document.querySelector('#Backspace')
 
 let a = '';
 let b = '';
@@ -16,7 +12,7 @@ let last;
 let hasEqual;
 
 const add = (a, b) => a + b;
-const subtract = (a, b) =>  String(a - b);
+const subtract = (a, b) =>  a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => {	
 	if (a === 0 || b === 0 ) {
@@ -40,7 +36,6 @@ function operate(a, func, b) {
 	}
 }
 
-
 function variablesUpdater(value) {
 	let mathAsses = mathFuncs.includes(value)
 	if (mathAsses && a && b && operation) {
@@ -60,7 +55,6 @@ function variablesUpdater(value) {
 
 
 function displayUpdate(e) {
-	console.log()
 	let value = !e ? '' : e;
 	topString += mathFuncs.includes(value) ? ` ${value} ` : `${value}`;
 	if (mathFuncs.includes(value)) {
@@ -70,7 +64,6 @@ function displayUpdate(e) {
 	}
 	bottomDisplay.textContent = bottomContent;
 	topDisplay.textContent = ` ${topString} `;
-	
 }
 
 function clearCall() {
@@ -100,7 +93,9 @@ function main(e) {
 		backspace()
 	} else if (key === '='){
 		equalCall()
-	}
+	} else if (key === 'Escape') {
+		clearCall()
+		}
 	else {
 		variablesUpdater(key);
 		displayUpdate(key);}
@@ -128,9 +123,5 @@ function backspace() {
 	bottomDisplay.textContent = bottomContent;
 }
 
-backButton.addEventListener('click', backspace)
-numButtons.forEach(button => button.addEventListener('click', main))
-funcButtons.forEach(button => button.addEventListener('click', main))
-clearButton.addEventListener('click',clearCall)
-equalButton.addEventListener('click', equalCall)
+allButtons.forEach(button => button.addEventListener('click', main))
 window.addEventListener('keydown', main)
