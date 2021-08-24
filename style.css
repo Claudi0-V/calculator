@@ -1,6 +1,13 @@
-body {
-  background-color: gray;
+:root {
+  --main-bg: #F9F9F9;
+  margin: 0px;
+  box-sizing: border-box;
+}
 
+body {
+  background: linear-gradient(142deg, rgba(62,142,244,1) 9%, rgba(238,74,74,1) 87%) no-repeat center center fixed;
+  background-size: cover;
+  font: 400 13px Arial
 }
 
 #main {
@@ -9,57 +16,73 @@ body {
   width: 400px;
   height: 600px;
   margin: auto;
-  background-color: black;
+  background-color: var(--main-bg);
   border-radius: 7px;
   overflow: hidden;
   text-align: right;
+  border: 1px solid black;
 }
-
 
 /* display section */
 .display-container {
   width: 100%;
-  height: 40%;  
-  background-color: white;
+  height: 35%;  
 }
 
 #top-display {
   font-size: 20px;
   height: 35%;
   margin-top: 30px;
+  padding: 5px;
+}
+
+#top-display::after {
+  content: '';
+  width: 100%;
+  height: 1px;
+  margin-top: 5px;
+  background: linear-gradient(90deg, rgba(255,255,255,1) 1%, rgba(24,24,24,1) 11%, rgba(24,24,24,1) 87%, rgba(255,255,255,1) 100%);
+  display: block;
 }
 
 #bottom-display {
+  height: 65%;
   font-size: 35px;
-}
+  }
 
 /* buttons section */
 
 .buttons {
-  background-color: #;
+  border: none;
+  font-size: 1.5em;
+  margin: 2px;
+  border-radius: 0.5em;
+   box-shadow: 1px  1px 1px rgba(0, 0, 0, 0.1)
 }
 
 .buttons-container {
-  width: 100%;
+  width: 95%;
   height: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  background-color: gray;
+  padding: 10px;
 }
 
-#equal {
+[data-key="="] {
   grid-row: 3 / 6;
   grid-column: 4 / 5;
   background-color: lightgreen;
 }
 
-.equal:hover {
+[data-key="="]:hover {
   background-color: green;
+
 }
 
 .func-btn {
   background-color: lightgoldenrodyellow;
+  font-size: 1.8em;
 }
 
 .func-btn:hover {
