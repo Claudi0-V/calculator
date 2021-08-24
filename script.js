@@ -74,7 +74,7 @@ const findKey = e => {
 	let keyfound;
 	if (e.type === "keydown") {
 		const foundKey = document.querySelector(`.buttons[data-key="${event.key}"]`);
-		if (!foundKey) return;
+		if (!foundKey) return undefined;
 		keyfound = e.key;
 	} else keyfound = e.target.dataset.key;
 	return keyfound;
@@ -99,10 +99,10 @@ const backspace = () => {
 }
 
 const main = e => {
-	if (hasEqual) clearCall();
 	let key = findKey(e);
 	if (!key) return;
-	else if (key === 'Backspace') backspace();
+	if (hasEqual) clearCall();
+	if (key === 'Backspace') backspace();
 	else if (key === '=') equalCall();
 	else if (key === 'Escape') clearCall();
 	else {
