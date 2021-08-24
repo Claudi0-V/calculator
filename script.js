@@ -21,7 +21,7 @@ const divide = (a, b) => {
 	return String(a / b);
 }
 
-function operate(a, b, func) {
+const operate = (a, b, func) => {
 	let val1 = parseFloat(a);
 	let val2 = parseFloat(b);
 	switch (func) {
@@ -36,7 +36,7 @@ function operate(a, b, func) {
 	}
 }
 
-function variablesUpdater(value) {
+const variablesUpdater = value => {
 	let mathAsses = mathFuncs.includes(value)
 	if (mathAsses && a && b && operation) {
 		a = operate(a, b, operation);
@@ -54,7 +54,7 @@ function variablesUpdater(value) {
 }
 
 
-function displayUpdate(e) {
+const displayUpdate = e => {
 	let value = !e ? '' : e;
 	topString += mathFuncs.includes(value) ? ` ${value} ` : `${value}`;
 	if (mathFuncs.includes(value)) bottomContent  = value;
@@ -63,47 +63,24 @@ function displayUpdate(e) {
 	topDisplay.textContent = ` ${topString} `;
 }
 
-function clearCall() {
-	a = '';
-	b = '';
-	operation = '';
-	topString = '';
-	bottomContent = '';
-	last = '';
+const clearCall = () => {
+	a = b = operation = topString = bottomContent = last = '';
 	hasEqual = false;
 	displayUpdate('');
 }
 
 
-function findKey(e) {
-	let key;
+const findKey = e => {
+	let keyfound;
 	if (e.type === "keydown") {
 		const foundKey = document.querySelector(`.buttons[data-key="${event.key}"]`);
-		if (!foundKey) return undefined;
-		key = e.key;
-	} else {
-		key = e.target.dataset.key
-	}
-	return key
+		if (!foundKey) return;
+		keyfound = e.key;
+	} else keyfound = e.target.dataset.key;
+	return keyfound;
 }
 
-function main(e) {
-	if (hasEqual) clearCall();
-	let key = findKey(e);
-	if (!key) return;
-	if (key === 'Backspace') {
-		backspace()
-	} else if (key === '='){
-		equalCall()
-	} else if (key === 'Escape') {
-		clearCall()
-		}
-	else {
-		variablesUpdater(key);
-		displayUpdate(key);}
-}
-
-function equalCall() {
+const equalCall = () => {
 	topString += ' = ';
 	bottomContent = '';
 	let result = operate(a,b,operation);
@@ -111,18 +88,26 @@ function equalCall() {
 	hasEqual = true;
 }
 
-function backspace() {
-	if (last === 'a') {
-		a = a.slice(0,-2);
-	} else if (last === 'b') {
-		b = b.slice(0,-2);
-	} else if (last === 'operation') {
-		operation = '';
-	}
+const backspace = () => {
+	if (last === 'a') a = a.slice(0,-2);
+	else if (last === 'b') b = b.slice(0,-2);
+	else if (last === 'operation') operation = '';
 	topString = topString.slice(0, -1);
 	bottomContent = bottomContent.slice(0, -1);
 	topDisplay.textContent = ` ${topString} `;	
 	bottomDisplay.textContent = bottomContent;
+}
+
+const main = e => {
+	if (hasEqual) clearCall();
+	let key = findKey(e);
+	if (!key) return;
+	else if (key === 'Backspace') backspace();
+	else if (key === '=') equalCall();
+	else if (key === 'Escape') clearCall();
+	else {
+		variablesUpdater(key);
+		displayUpdate(key);}
 }
 
 allButtons.forEach(button => button.addEventListener('click', main))
