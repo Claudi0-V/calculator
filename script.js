@@ -21,7 +21,7 @@ const divide = (a, b) => {
 	return String(a / b);
 }
 
-function operate(a, func, b) {
+function operate(a, b, func) {
 	let val1 = parseFloat(a);
 	let val2 = parseFloat(b);
 	switch (func) {
@@ -39,7 +39,7 @@ function operate(a, func, b) {
 function variablesUpdater(value) {
 	let mathAsses = mathFuncs.includes(value)
 	if (mathAsses && a && b && operation) {
-		a = operate(a,operation,b);
+		a = operate(a, b, operation);
 		b = '';
 	} else if (!b && !mathAsses && !operation) {
 		a += value;
@@ -57,11 +57,8 @@ function variablesUpdater(value) {
 function displayUpdate(e) {
 	let value = !e ? '' : e;
 	topString += mathFuncs.includes(value) ? ` ${value} ` : `${value}`;
-	if (mathFuncs.includes(value)) {
-		bottomContent  = value;
-	} else {
-	bottomContent += value;
-	}
+	if (mathFuncs.includes(value)) bottomContent  = value;
+	else bottomContent += value;
 	bottomDisplay.textContent = bottomContent;
 	topDisplay.textContent = ` ${topString} `;
 }
@@ -77,18 +74,23 @@ function clearCall() {
 	displayUpdate('');
 }
 
-function main(e) {
-	if (hasEqual) {
-		clearCall()
-	}
+
+function findKey(e) {
 	let key;
-	if (event.type === "keydown") {
+	if (e.type === "keydown") {
 		const foundKey = document.querySelector(`.buttons[data-key="${event.key}"]`);
-		if (!foundKey) return;
-		key = event.key;
+		if (!foundKey) return undefined;
+		key = e.key;
 	} else {
 		key = e.target.dataset.key
 	}
+	return key
+}
+
+function main(e) {
+	if (hasEqual) clearCall();
+	let key = findKey(e);
+	if (!key) return;
 	if (key === 'Backspace') {
 		backspace()
 	} else if (key === '='){
@@ -104,7 +106,7 @@ function main(e) {
 function equalCall() {
 	topString += ' = ';
 	bottomContent = '';
-	let result = operate(a,operation,b);
+	let result = operate(a,b,operation);
 	displayUpdate(result);
 	hasEqual = true;
 }
