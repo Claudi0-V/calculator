@@ -7,7 +7,15 @@
 body {
   background: linear-gradient(142deg, rgba(62,142,244,1) 9%, rgba(238,74,74,1) 87%) no-repeat center center fixed;
   background-size: cover;
-  font: 400 13px Arial
+  font: 400 13px Arial;
+}
+
+#main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: red;
 }
 
 #main {
@@ -35,6 +43,14 @@ body {
   margin-top: 30px;
   padding: 5px;
 }
+
+.left-text-wrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  direction: rtl;
+}
+
 
 #top-display::after {
   content: '';
