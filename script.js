@@ -3,8 +3,8 @@ const bottomDisplay = document.querySelector('#bottom-display');
 const allButtons = document.querySelectorAll('.buttons');
 const mathFuncs = ['+', '-', '*', '/'];
 
-let operator1 = '';
-let operator2 = '';
+let operand1 = '';
+let operand2 = '';
 let operation = '';
 let topString ='';
 let bottomContent = '';
@@ -29,19 +29,21 @@ const operate = (a, b, func) => {
 
 const variablesUpdater = value => {
 	let mathAsses = mathFuncs.includes(value);
-	if (mathAsses && operator1 && operator2 && operation) {
-		operator1 = operate(operator1, operator2, operation);
-		operator2 = '';
-	} else if (!operator2 && !mathAsses && !operation) {
-		operator1 += value;
-		last = 'operator1'
+	//if is an operator and the operand1 the operand2, and the operation 
+    //aren't empty this means that is a new operation
+	if (mathAsses && operand1 && operand2 && operation) {
+		operand1 = operate(operand1, operand2, operation);
+		operand2 = '';
+	} else if (!operand2 && !mathAsses && !operation) {
+		operand1 += value;
+		last = 'operand1'
 	} else if (mathAsses) {
-	 	operation = value;
-	 	last = 'operation'
-	 } else {
-	 	operator2 += value
-	 	last = 'operator2';
-	 }
+		operation = value;
+		last = 'operation'
+	} else {
+		operand2 += value
+		last = 'operand2';
+	}
 }
 
 
@@ -55,7 +57,7 @@ const displayUpdate = e => {
 }
 
 const clearCall = () => {
-	operator1 = operator2 = operation = topString = bottomContent = last = '';
+	operand1 = operand2 = operation = topString = bottomContent = last = '';
 	hasEqual = false;
 	displayUpdate('');
 }
@@ -74,14 +76,14 @@ const findKey = e => {
 const equalCall = () => {
 	topString += ' = ';
 	bottomContent = '';
-	let result = operate(operator1,operator2,operation);
+	let result = operate(operand1,operand2,operation);
 	displayUpdate(result);
 	hasEqual = true;
 }
 
 const backspace = () => {
-	if (last === 'a') operator1 = operator1.slice(0,-2);
-	else if (last === 'b') operator2 = operator2.slice(0,-2);
+	if (last === 'a') operand1 = operand1.slice(0,-2);
+	else if (last === 'b') operand2 = operand2.slice(0,-2);
 	else if (last === 'operation') operation = '';
 	topString = topString.slice(0, -1);
 	bottomContent = bottomContent.slice(0, -1);
