@@ -2,7 +2,7 @@ const topDisplay = document.querySelector('#top-display');
 const bottomDisplay = document.querySelector('#bottom-display');
 const allButtons = document.querySelectorAll('.buttons');
 const mathFuncs = ['+', '-', '*', '/'];
-
+const inputvalue = document.querySelector('#input-number');
 let a = '';
 let b = '';
 let operation = '';
@@ -11,40 +11,31 @@ let bottomContent = '';
 let last;
 let hasEqual;
 
-const add = (a, b) => a + b;
-const subtract = (a, b) =>  a - b;
-const multiply = (a, b) => a * b;
-const divide = (a, b) => {	
-	if (a === 0 || b === 0 ) {
-		return "Infinity"
-	}
-	return String(a / b);
-}
-
 const operate = (a, b, func) => {
 	let val1 = parseFloat(a);
 	let val2 = parseFloat(b);
 	switch (func) {
 		case mathFuncs[0]:
-			return add(val1,val2)
+			return val1 + val2;
 		case mathFuncs[1]:
-			return subtract(val1,val2)
+			val1 - val2;
 		case mathFuncs[2]:
-			return multiply(val1,val2)
+			return val1 * val2;
 		case mathFuncs[3]:
-			return divide(val1,val2)
+			return (a === 0 || b === 0 ) ? 
+				"Infinity" :  a / b ;
 	}
 }
 
 const variablesUpdater = value => {
-	let mathAsses = mathFuncs.includes(value)
+	let mathAsses = mathFuncs.includes(value);
 	if (mathAsses && a && b && operation) {
 		a = operate(a, b, operation);
 		b = '';
 	} else if (!b && !mathAsses && !operation) {
 		a += value;
 		last = 'a'
-	 } else if (mathAsses) {
+	} else if (mathAsses) {
 	 	operation = value;
 	 	last = 'operation'
 	 } else {
@@ -102,7 +93,7 @@ const main = e => {
 	let key = findKey(e);
 	if (!key) return;
 	if (hasEqual) clearCall();
-	if (key === 'Backspace') backspace();
+	else if (key === 'Backspace') backspace();
 	else if (key === '=') equalCall();
 	else if (key === 'Escape') clearCall();
 	else {
@@ -110,5 +101,6 @@ const main = e => {
 		displayUpdate(key);}
 }
 
-allButtons.forEach(button => button.addEventListener('click', main))
-window.addEventListener('keydown', main)
+allButtons.forEach(button => button.addEventListener('click', main));
+window.addEventListener('keydown', main);
+
