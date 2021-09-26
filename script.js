@@ -2,9 +2,9 @@ const topDisplay = document.querySelector('#top-display');
 const bottomDisplay = document.querySelector('#bottom-display');
 const allButtons = document.querySelectorAll('.buttons');
 const mathFuncs = ['+', '-', '*', '/'];
-const inputvalue = document.querySelector('#input-number');
-let a = '';
-let b = '';
+
+let operator1 = '';
+let operator2 = '';
 let operation = '';
 let topString ='';
 let bottomContent = '';
@@ -12,13 +12,13 @@ let last;
 let hasEqual;
 
 const operate = (a, b, func) => {
-	let val1 = parseFloat(a);
-	let val2 = parseFloat(b);
+	const val1 = parseFloat(a);
+	const val2 = parseFloat(b);
 	switch (func) {
 		case mathFuncs[0]:
 			return val1 + val2;
 		case mathFuncs[1]:
-			val1 - val2;
+			return val1 - val2;
 		case mathFuncs[2]:
 			return val1 * val2;
 		case mathFuncs[3]:
@@ -29,18 +29,18 @@ const operate = (a, b, func) => {
 
 const variablesUpdater = value => {
 	let mathAsses = mathFuncs.includes(value);
-	if (mathAsses && a && b && operation) {
-		a = operate(a, b, operation);
-		b = '';
-	} else if (!b && !mathAsses && !operation) {
-		a += value;
-		last = 'a'
+	if (mathAsses && operator1 && operator2 && operation) {
+		operator1 = operate(operator1, operator2, operation);
+		operator2 = '';
+	} else if (!operator2 && !mathAsses && !operation) {
+		operator1 += value;
+		last = 'operator1'
 	} else if (mathAsses) {
 	 	operation = value;
 	 	last = 'operation'
 	 } else {
-	 	b += value
-	 	last = 'b';
+	 	operator2 += value
+	 	last = 'operator2';
 	 }
 }
 
@@ -55,7 +55,7 @@ const displayUpdate = e => {
 }
 
 const clearCall = () => {
-	a = b = operation = topString = bottomContent = last = '';
+	operator1 = operator2 = operation = topString = bottomContent = last = '';
 	hasEqual = false;
 	displayUpdate('');
 }
@@ -74,14 +74,14 @@ const findKey = e => {
 const equalCall = () => {
 	topString += ' = ';
 	bottomContent = '';
-	let result = operate(a,b,operation);
+	let result = operate(operator1,operator2,operation);
 	displayUpdate(result);
 	hasEqual = true;
 }
 
 const backspace = () => {
-	if (last === 'a') a = a.slice(0,-2);
-	else if (last === 'b') b = b.slice(0,-2);
+	if (last === 'a') operator1 = operator1.slice(0,-2);
+	else if (last === 'b') operator2 = operator2.slice(0,-2);
 	else if (last === 'operation') operation = '';
 	topString = topString.slice(0, -1);
 	bottomContent = bottomContent.slice(0, -1);
@@ -103,4 +103,3 @@ const main = e => {
 
 allButtons.forEach(button => button.addEventListener('click', main));
 window.addEventListener('keydown', main);
-

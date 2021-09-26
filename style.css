@@ -47,8 +47,6 @@ body {
 .left-text-wrap {
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-  direction: rtl;
 }
 
 
@@ -103,4 +101,9 @@ body {
 
 .func-btn:hover {
   background-color: yellow;
+}
+
+
+#input-number {
+
 }
