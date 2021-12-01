@@ -20,28 +20,19 @@ let bottomContent = '';
 let last;
 let hasEqual;
 
-const add = (a, b) => a + b;
-const subtract = (a, b) => a - b;
-const multiply = (a, b) => a * b;
-const divide = (a, b) => {
-    if (a === 0 || b === 0) {
-        return "Infinity"
-    }
-    return String(a / b);
-}
-
 const operate = (a, b, func) => {
     let val1 = parseFloat(a);
     let val2 = parseFloat(b);
     switch (func) {
         case mathFuncs[0]:
-            return add(val1, val2)
+            return val1 + val2;
         case mathFuncs[1]:
-            return subtract(val1, val2)
+            return val1 - val2;
         case mathFuncs[2]:
-            return multiply(val1, val2)
+            return val1 * val2;
         case mathFuncs[3]:
-            return divide(val1, val2)
+            if (val1 === 0 || val2 === 0) return "Infinity";
+            return String(val1 / val2);
     }
 }
 
@@ -62,7 +53,6 @@ const variablesUpdater = value => {
     }
 }
 
-
 const displayUpdate = e => {
     let value = !e ? '' : e;
     topString += mathFuncs.includes(value) ? ` ${value} ` : `${value}`;
@@ -77,7 +67,6 @@ const clearCall = () => {
     hasEqual = false;
     displayUpdate('');
 }
-
 
 const findKey = e => {
     let keyfound;
