@@ -55,11 +55,12 @@ const variablesUpdater = (value) => {
 
 const displayUpdate = (event) => {
     const value = event ? event : '';
-    topString += mathFuncs.includes(value) ? ` ${value} ` : `${value}`;
-    if (mathFuncs.includes(value)) bottomContent = value;
+    const isOperation = mathFuncs.includes(value)
+    topString += isOperation ? ` ${value} ` : `${value}`;
+    if (mathFuncs.includes(value)) bottomContent = "";
     else bottomContent += value;
     bottomDisplay.value = bottomContent;
-    topDisplay.value = topString;
+    topDisplay.textContent = topString;
 }
 
 const clearCall = () => {
@@ -90,7 +91,7 @@ const backspace = () => {
     else if (last === 'operation') operation = '';
     topString = topString.slice(0, -1);
     bottomContent = bottomContent.slice(0, -1);
-    topDisplay.value = ` ${topString} `;
+    topDisplay.textContent = ` ${topString} `;
     bottomDisplay.value = bottomContent;
 }
 
