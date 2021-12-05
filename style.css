@@ -11,6 +11,8 @@ body {
   background: linear-gradient(142deg, rgba(62,142,244,1) 9%, rgba(238,74,74,1) 87%) no-repeat center center fixed;
   background-size: cover;
   font: 400 13px Arial;
+  width: 100vw;
+  height: 100vh;
 }
 
 main {
@@ -28,9 +30,10 @@ main {
   width: min(90%, 360px);
   height: min(98vh, 570px);
   background-color: var(--main-bg);
-  border-radius: 7px;
+  border-radius: 5px;
   overflow: hidden;
   text-align: right;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 /* display section */
