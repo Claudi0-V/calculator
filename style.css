@@ -31,7 +31,6 @@ main {
   border-radius: 7px;
   overflow: hidden;
   text-align: right;
-  border: 1px solid black;
 }
 
 /* display section */
@@ -40,11 +39,14 @@ main {
   height: 35%;
 }
 
-#top-display {
+.top-display {
+    width: 100%;
   font-size: 20px;
   height: 35%;
-  margin-top: 30px;
+  margin-top: 20px;
   padding: 5px;
+    border: none;
+    pointer-events: none;
 }
 
 .left-text-wrap {
@@ -55,7 +57,7 @@ main {
 }
 
 
-#top-display::after {
+.top-display::after {
   content: '';
   width: 100%;
   height: 1px;
@@ -64,9 +66,12 @@ main {
   display: block;
 }
 
-#bottom-display {
-  height: 65%;
+.bottom-display {
+    width: 100%;
+  height: 35%;
   font-size: 35px;
+  pointer-events: none;
+    border: none;
   }
 
 /* buttons section */
