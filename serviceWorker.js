@@ -10,8 +10,6 @@ const assets = [
     "/favicon/favicon-16x16.png"
 ]
 
-
-
 self.addEventListener("install", installEvent => {
     installEvent.waitUntil(
         caches.open(staticCalculator).then(cache => {
