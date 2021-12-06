@@ -109,4 +109,4 @@ const main = (event) => {
 }
 
 allButtons.forEach(button => button.addEventListener('click', main))
-window.addEventListener('keydown', main)
+window.addEventListener('keydown', () => main)
